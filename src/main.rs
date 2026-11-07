@@ -78,4 +78,10 @@ fn add_string_lenght(index: usize, vector: &mut Vec<u8>) -> &mut Vec<u8> {
     vector.insert(index, leange);
     vector
 }
-fn to_VARINT
+fn to_VARINT(value: i64, out: &mut Vec<u8>) {
+  while value >= 0x80 {
+    out.push((value as u8 & 0x7F) | 0x80);
+    value >>= 7;
+  }
+  out.push(v as u8);
+}
