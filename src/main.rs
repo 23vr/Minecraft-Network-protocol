@@ -64,7 +64,7 @@ async fn main() {
     send_data(&data_prelogin_phase, &mut stream).await;
     send_data(&data_login_phase, &mut stream).await;
 }
-fn add_lenght(vector: &mut Vec<u8>) -> &mut Vec<u8> {
+async fn add_lenght(vector: &mut Vec<u8>) -> &mut Vec<u8> {
     let laenge: u8 = vector.len() as u8;
     vector.insert(0, laenge);
     vector
@@ -73,15 +73,15 @@ async fn send_data(vector: &Vec<u8>, stream: &mut TcpStream) {
     stream.write_all(vector).await;
     stream.flush().await;
 }
-fn add_string_lenght(index: usize, vector: &mut Vec<u8>) -> &mut Vec<u8> {
+async fn add_string_lenght(index: usize, vector: &mut Vec<u8>) -> &mut Vec<u8> {
     let leange: u8 = vector[index].to_string().len() as u8;
     vector.insert(index, leange);
     vector
 }
-fn to_VARINT(value: i64, out: &mut Vec<u8>) {
+async fn to_VARINT(value: i64, out: &mut Vec<u8>) {
   while value >= 0x80 {
     out.push((value as u8 & 0x7F) | 0x80);
     value >>= 7;
   }
-  out.push(v as u8);
+  out.push(valur as u8);
 }
